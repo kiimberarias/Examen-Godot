@@ -1,3 +1,79 @@
 [gd_scene format=3 uid="uid://iabnafai37ga"]
 
+[ext_resource type="Script" uid="uid://bgo4jir666107" path="res://character_body_2d.gd" id="1_ayy3f"]
+[ext_resource type="Texture2D" uid="uid://svpm8bmo4u7e" path="res://icon.svg" id="2_gdby6"]
+[ext_resource type="Script" uid="uid://d1o83os35txd6" path="res://enemigo.gd" id="3_gdby6"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lfkbx"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_aui74"]
+radius = 3.0
+height = 19.268738
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lfkbx"]
+size = Vector2(423, 165)
+
 [node name="Node2D" type="Node2D" unique_id=386438222]
+
+[node name="personaje" type="CharacterBody2D" parent="." unique_id=882685179]
+position = Vector2(-60, -56)
+script = ExtResource("1_ayy3f")
+
+[node name="Sprite2D" type="Sprite2D" parent="personaje" unique_id=940294657]
+position = Vector2(-1.4305115e-06, 1.1920929e-07)
+scale = Vector2(0.15625001, 0.234375)
+texture = ExtResource("2_gdby6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="personaje" unique_id=851064171]
+shape = SubResource("CapsuleShape2D_lfkbx")
+
+[node name="Camera2D" type="Camera2D" parent="personaje" unique_id=670285017]
+
+[node name="enemigo" type="CharacterBody2D" parent="." unique_id=219662763]
+position = Vector2(203, -56)
+script = ExtResource("3_gdby6")
+
+[node name="Sprite2D" type="Sprite2D" parent="enemigo" unique_id=750196089]
+position = Vector2(-1.4305115e-06, 1.1920929e-07)
+scale = Vector2(0.15625001, 0.234375)
+texture = ExtResource("2_gdby6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemigo" unique_id=367016623]
+shape = SubResource("CapsuleShape2D_lfkbx")
+
+[node name="Camera2D" type="Camera2D" parent="enemigo" unique_id=1484822068]
+
+[node name="RayCastIzquierda2D" type="RayCast2D" parent="enemigo" unique_id=424582703]
+target_position = Vector2(-42, 0)
+
+[node name="Area2D" type="Area2D" parent="enemigo" unique_id=1822361965]
+position = Vector2(-9, 0)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="enemigo/Area2D" unique_id=152411086]
+rotation = -1.5693895
+scale = Vector2(0.99999994, 0.99999994)
+shape = SubResource("CapsuleShape2D_aui74")
+
+[node name="AreaArriba" type="Area2D" parent="enemigo" unique_id=2068771902]
+position = Vector2(0, -13)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="enemigo/AreaArriba" unique_id=549836306]
+rotation = -1.5693895
+scale = Vector2(0.99999994, 0.99999994)
+shape = SubResource("CapsuleShape2D_aui74")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=2078849466]
+position = Vector2(176, 68)
+scale = Vector2(1.1200024, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=2132002034]
+position = Vector2(-148.5, 18.5)
+shape = SubResource("RectangleShape2D_lfkbx")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D" unique_id=1888532755]
+position = Vector2(-148.5, 18.499992)
+scale = Vector2(3.3046877, 1.3046875)
+texture = ExtResource("2_gdby6")
+
+[connection signal="body_entered" from="enemigo/Area2D" to="personaje" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="enemigo/AreaArriba" to="personaje" method="_on_area_arriba_body_entered"]
