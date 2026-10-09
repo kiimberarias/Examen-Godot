@@ -76,4 +76,4 @@ scale = Vector2(3.3046877, 1.3046875)
 texture = ExtResource("2_gdby6")
 
 [connection signal="body_entered" from="enemigo/Area2D" to="personaje" method="_on_area_2d_body_entered"]
-[connection signal="body_entered" from="enemigo/AreaArriba" to="personaje" method="_on_area_arriba_body_entered"]
+[connection signal="body_entered" from="enemigo/AreaArriba" to="enemigo" method="_on_area_arriba_body_entered"]

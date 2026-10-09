@@ -20,3 +20,8 @@ func _physics_process(delta: float) -> void:
 	velocity.x = velocidad_actual
 
 	move_and_slide()
+
+
+func _on_area_arriba_body_entered(body: Node2D) -> void:
+	if body.name == "personaje":
+		queue_free()
